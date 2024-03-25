@@ -2,7 +2,6 @@ import os
 import shutil
 from pathlib import Path
 from .models import AudioExtention, VideoExtention, DocumentExtention, ImageExtention, UploadedFile
-from zipfile import ZipFile
 
 script_directory = Path(__file__).resolve()
 
@@ -39,3 +38,18 @@ def run_sorter():
                 destination_path = os.path.join(destination_folder, file_name)
                 shutil.move(file_path, destination_path)
                 print(f"File '{file_name}' has been moved to '{destination_path}.' ")
+
+    dir_to_zip = items_path
+
+    zipfile = shutil.make_archive(f'{os.path.join(dir_parent, "media")}/sorted_files', 'zip', dir_to_zip)
+
+    for folder in os.listdir(items_path):
+        
+        if folder != 'sorted_files.zip':
+            folder_path = os.path.join(items_path, folder)
+            for file in os.listdir(folder_path):
+                os.remove(os.path.join(folder_path, file))
+
+    return zipfile
+
+        
