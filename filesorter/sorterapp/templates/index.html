@@ -2,6 +2,17 @@
 {% load static %}
 
 {% block content %}
+<center>
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="formFileMultiple" class="form-label">Upload files you want sorted</label>
+        <input class="form-control" type="file" name="files_to_sort" id="formFileMultiple" multiple> <!-- Added name="file" -->
+      </div>
 
+      <button class="btn btn-primary" type="submit">Sort Files</button>
+    </form>
+</center>
 
 {% endblock %}
+ 
